@@ -1,0 +1,80 @@
+---
+//Imports
+import { useTranslations } from "@i18n/utils";
+import Base from "@layouts/Base.astro";
+import "@styles/markdown.css";
+
+// Get current language from URL
+export function getStaticPaths() {
+    return [
+        // English route: /dynamic-routing/subpage-1
+        // [...subpage1] = "subpage-1" captures the specific subpage
+        // This creates the final URL: /dynamic-routing/subpage-1
+        {
+            params: {
+                dyn_routing: "/dynamic-routing",
+                subpage1: "subpage-1",
+            },
+            props: { lang: "en" },
+        },
+        // Slovenian route: /sl/dinamicno-usmerjanje/podstran-1
+        // [...subpage1] = "podstran-1" captures the localized subpage name
+        // This creates the final URL: /sl/dinamicno-usmerjanje/podstran-1
+        {
+            params: {
+                dyn_routing: "/sl/dinamicno-usmerjanje",
+                subpage1: "podstran-1",
+            },
+            props: { lang: "sl" },
+        },
+    ];
+}
+
+// Props
+const { lang } = Astro.props;
+
+// Translations
+const t = useTranslations(lang);
+---
+
+<Base
+    title={t("pages:subpages.subpage-1.title")}
+    meta={{
+        description: t("pages:head.description"),
+    }}
+>
+    <section id="md-content">
+        <h1>{t("pages:subpages.subpage-1.title")}</h1>
+        <p set:html={t("pages:subpages.subpage-1.description")} />
+
+        <pre
+            class="astro-code github-dark"
+            style="background-color:#24292e;color:#e1e4e8;overflow-x:auto"
+            tabindex="0"
+            data-language="plaintext"><code>{`// Get current language from URL
+export function getStaticPaths() {
+    return [
+        // English route: /dynamic-routing/subpage-1
+        // [...subpage1] = "subpage-1" captures the specific subpage
+        // This creates the final URL: /dynamic-routing/subpage-1
+        {
+            params: {
+                dyn_routing: "/dynamic-routing",
+                subpage1: "subpage-1",
+            },
+            props: { lang: "en" },
+        },
+        // Slovenian route: /sl/dinamicno-usmerjanje/podstran-1
+        // [...subpage1] = "podstran-1" captures the localized subpage name
+        // This creates the final URL: /sl/dinamicno-usmerjanje/podstran-1
+        {
+            params: {
+                dyn_routing: "/sl/dinamicno-usmerjanje",
+                subpage1: "podstran-1",
+            },
+            props: { lang: "sl" },
+        },
+    ];
+}`}</code></pre>
+    </section>
+</Base>

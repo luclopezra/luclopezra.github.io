@@ -1,0 +1,99 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import Base from "@layouts/Base.astro";
+import { Image } from "astro:assets";
+import { formatDate } from "@utils/utils";
+
+export const getStaticPaths = (async () => {
+    const posts = await getCollection("blog", (entry) => !entry.data.isDraft);
+    const authorsRaw = await getCollection("authors");
+
+    const createPath = (post, lang, blogPath) => {
+        const author = authorsRaw.find((a) => a.id === post.data.author.id);
+        const localizedAuthor = author
+            ? {
+                  ...author,
+                  data: {
+                      ...author.data,
+                      position:
+                          author.data.position?.[lang] ??
+                          author.data.position?.en ??
+                          "",
+                  },
+              }
+            : null;
+
+        return {
+            params: {
+                blog: blogPath,
+                slug: post.id.split("/")[1],
+            },
+            props: { post, lang, author: localizedAuthor },
+        };
+    };
+
+    const enPaths = posts
+        .filter((post) => post.id.startsWith("en/"))
+        .map((post) => createPath(post, "en", "/blog"));
+
+    const slPaths = posts
+        .filter((post) => post.id.startsWith("sl/"))
+        .map((post) => createPath(post, "sl", "/sl/spletni-dnevnik"));
+
+    return [...enPaths, ...slPaths];
+}) satisfies GetStaticPaths;
+
+const { post, lang, author } = Astro.props;
+const { Content } = await render(post);
+
+import "@styles/markdown.css";
+---
+
+<Base
+    title={post?.data?.title}
+    meta={{
+        description: post?.data?.description,
+    }}
+>
+    <section>
+        <article>
+            <!--Main Article Image-->
+            <Image
+                src={post?.data?.image}
+                alt={post?.data?.imageAlt}
+                class="mb-10"
+                loading="eager"
+                quality={"high"}
+                sizes="(min-width: 1024px) 800px, 100vw"
+            />
+
+            <h1 class="!text-left">{post?.data?.title}</h1>
+
+            <div class="author-time">
+                <div class="author">
+                    <Image
+                        src={author?.data?.image}
+                        alt={author?.data?.name}
+                        height={36}
+                        width={36}
+                        loading="eager"
+                        quality={"mid"}
+                        class="rounded-full"
+                    />
+                    <div>
+                        <h3>{author?.data?.name}</h3>
+                        <p class="position">
+                            {author?.data?.position}
+                        </p>
+                    </div>
+                </div>
+                <p class="date">{formatDate(post.data.pubDate)}</p>
+            </div>
+
+            <section id="md-content">
+                <Content />
+            </section>
+        </article>
+    </section>
+</Base>

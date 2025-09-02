@@ -1,0 +1,24 @@
+{
+    "head": {
+        "title": "Spletni Dnevnik",
+        "description": "Primer spletnega dnevnika"
+    },
+    "title": "Spletni Dnevnik",
+    "description": "Primer spletnega dnevnika",
+    "descriptionPagination": "Primer oštevilčenih objav na blogu",
+    "readMore": "Preberi več",
+    "noPosts": "V tem trenutku ni na voljo objav na blogu.",
+    "totalPosts": "{{count}} objav",
+    "paginationExample": "Primer strani",
+    "pagination": {
+        "label": "Navigacija strani",
+        "previous": "Prejšnja",
+        "next": "Naslednja",
+        "previousPage": "Pojdi na prejšnjo stran",
+        "nextPage": "Pojdi na naslednjo stran",
+        "noPreviousPage": "Ni prejšnje strani",
+        "noNextPage": "Ni naslednje strani",
+        "currentPage": "Trenutna stran {{page}}",
+        "pageOf": "Stran {{current}} od {{total}}"
+    }
+}

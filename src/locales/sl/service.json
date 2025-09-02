@@ -1,0 +1,20 @@
+{
+    "list": [
+        {
+            "title": "Spletni razvoj",
+            "description": "Moderne, odzivne spletne strani zgrajene s sodobnimi tehnologijami."
+        },
+        {
+            "title": "Mobilne aplikacije",
+            "description": "Nativne in večplatformne mobilne aplikacije za iOS in Android."
+        },
+        {
+            "title": "UI/UX oblikovanje",
+            "description": "Lepe, uporabniku prijazne vmesnike, ki izboljšajo uporabniško izkušnjo."
+        },
+        {
+            "title": "SEO optimizacija",
+            "description": "Izboljšanje vidnosti in uvrstitve vaše spletne strani v iskalnikih."
+        }
+    ]
+}

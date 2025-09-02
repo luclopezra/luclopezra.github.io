@@ -1,0 +1,64 @@
+---
+import { useTranslations, useTranslatedPath } from "@i18n/utils";
+import Base from "@layouts/Base.astro";
+
+export function getStaticPaths() {
+    return [
+        // English version: /service
+        {
+            params: { dyn_routing: "dynamic-routing", index: undefined },
+            props: { lang: "en" },
+        },
+        // Slovenian version: /sl/storitve
+        {
+            params: { dyn_routing: `sl`, index: "dinamicno-usmerjanje" }, // "sl/storitve"
+            props: { lang: "sl" },
+        },
+    ];
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<Base
+    title={t("pages:head.title")}
+    meta={{
+        description: t("pages:head.description"),
+    }}
+>
+    <section>
+        <h1>{t("pages:title")}</h1>
+        <p class="text-center" set:html={t("pages:description")} />
+
+        <div class="flex gap-8 mt-16">
+            {
+                Object.keys(t("pages:subpages")).map((key) => {
+                    const title = t(`pages:subpages.${key}.title`);
+                    const desc = t(`pages:subpages.${key}.description`).split(
+                        "<br />"
+                    )[0];
+
+                    return (
+                        <article class="card">
+                            <a
+                                href={translatePath(`/dynamic-routing/${key}`)}
+                                title={desc}
+                                aria-label={`Read more about ${title}`}
+                            >
+                                <h2>{title}</h2>
+                                <p>{desc}</p>
+                                <div class="mt-4 w-fit">
+                                    <p aria-hidden="true" class="button">
+                                        {t("pages:link")}
+                                    </p>
+                                </div>
+                            </a>
+                        </article>
+                    );
+                })
+            }
+        </div>
+    </section>
+</Base>
