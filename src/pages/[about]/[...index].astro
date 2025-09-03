@@ -1,6 +1,5 @@
 ---
 //Imports
-import { useTranslations } from "@i18n/utils";
 import Base from "@layouts/Base.astro";
 import "@styles/markdown.css";
 
@@ -28,20 +27,18 @@ export function getStaticPaths() {
 // Props
 const { lang } = Astro.props;
 
-// Translations
-const t = useTranslations(lang);
-
 // Dynamically import the correct MDX file based on the language
-const { Content } = await import(`./_about-${lang}.mdx`);
+const { Content, frontmatter } = await import(`./_about-${lang}.mdx`);
 ---
 
 <Base
-    title={t("about:head.title")}
+    title={frontmatter?.title}
     meta={{
-        description: t("about:head.description"),
+        description: frontmatter?.description,
+        keywords: frontmatter?.keywords,
     }}
 >
-    <section id="md-content">
+    <section id="md-content" aria-label="Page content">
         <Content />
     </section>
 </Base>

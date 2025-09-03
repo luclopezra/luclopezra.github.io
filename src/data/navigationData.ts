@@ -1,48 +1,46 @@
 const navigationData = [
     {
-        key: "menu.list.home",
-        url: "/",
+        label: "menu.list.home",
+        href: "/",
         children: [],
     },
     {
-        key: "menu.list.about",
-        url: "/about",
+        label: "menu.list.about",
+        href: "/about",
         children: [],
     },
     {
-        /// href
-        /// caption
-        key: "menu.list.pages",
-        url: "/pages",
+        label: "menu.list.pages",
+        href: "/pages",
         children: [],
     },
     {
-        key: "menu.list.dynamicRouting",
-        url: "/dynamic-routing",
+        label: "menu.list.dynamicRouting",
+        href: "/dynamic-routing",
         children: [
             {
-                key: "menu.list.subpage-1",
-                url: "/dynamic-routing/subpage-1",
+                label: "menu.list.subpage-1",
+                href: "/dynamic-routing/subpage-1",
             },
             {
-                key: "menu.list.subpage-2",
-                url: "/dynamic-routing/subpage-2",
+                label: "menu.list.subpage-2",
+                href: "/dynamic-routing/subpage-2",
             },
         ],
     },
     {
-        key: "menu.list.blog",
-        url: "/blog",
+        label: "menu.list.blog",
+        href: "/blog",
         children: [],
     },
     {
-        key: "menu.list.pagination",
-        url: "/blog-pagination",
+        label: "menu.list.pagination",
+        href: "/blog-pagination",
         children: [],
     },
     {
-        key: "menu.list.contact",
-        url: "/contact",
+        label: "menu.list.contact",
+        href: "/contact",
         children: [],
     },
 ];

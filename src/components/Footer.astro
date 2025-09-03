@@ -43,14 +43,14 @@ const currentYear = new Date().getFullYear();
                 {
                     navigationData.map(
                         (entry: any) =>
-                            entry.url && (
+                            entry.href && (
                                 <li>
                                     <a
-                                        href={translatePath(entry.url)}
+                                        href={translatePath(entry.href)}
                                         tabindex="0"
-                                        aria-label={t(entry.key)}
+                                        aria-label={t(entry.label)}
                                     >
-                                        {t(entry.key)}
+                                        {t(entry.label)}
                                     </a>
                                 </li>
                             )

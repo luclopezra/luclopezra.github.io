@@ -43,14 +43,15 @@ const t = useTranslations(lang);
 ---
 
 <Base
-    title={t("pages:subpages.subpage-2.title")}
+    title={t("routing:subpages.subpage-2.title")}
     meta={{
-        description: t("pages:head.description"),
+        description: t("routing:subpages.subpage-2.description"),
+        keywords: t("routing:subpages.subpage-2.keywords"),
     }}
 >
     <section id="md-content">
-        <h1>{t("pages:subpages.subpage-2.title")}</h1>
-        <p set:html={t("pages:subpages.subpage-2.description")} />
+        <h1>{t("routing:subpages.subpage-2.title")}</h1>
+        <p set:html={t("routing:subpages.subpage-2.description")} />
 
         <pre
             class="astro-code github-dark"

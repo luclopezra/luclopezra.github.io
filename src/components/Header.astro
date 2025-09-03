@@ -53,29 +53,29 @@ const translatePath = useTranslatedPath(lang);
                 navigationData.map((item) => (
                     <li class="nav-item lg:relative" role="none">
                         <a
-                            href={translatePath(item.url)}
+                            href={translatePath(item.href)}
                             class="nav-link block"
                             role="menuitem"
-                            aria-label={t(item.key)}
+                            aria-label={t(item.label)}
                         >
-                            {t(item.key)}
+                            {t(item.label)}
                         </a>
 
                         {item.children?.length > 0 && (
                             <ul
                                 class="nav-dropdown"
                                 role="menu"
-                                aria-label={`${t(item.key)}`}
+                                aria-label={`${t(item.label)}`}
                             >
                                 {item.children.map((child: any) => (
                                     <li role="none">
                                         <a
-                                            href={translatePath(child.url)}
+                                            href={translatePath(child.href)}
                                             class="nav-dropdown-link"
                                             role="menuitem"
-                                            aria-label={t(child.key)}
+                                            aria-label={t(child.label)}
                                         >
-                                            {t(child.key)}
+                                            {t(child.label)}
                                         </a>
                                     </li>
                                 ))}

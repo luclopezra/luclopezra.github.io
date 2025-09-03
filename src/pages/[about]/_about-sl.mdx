@@ -1,3 +1,10 @@
+---
+# SEO metadata
+title: "O projektu"
+description: "Spoznaj večjezični Astro starter projekt z dinamičnim usmerjanjem, i18n lokalizacijo, slovensko in angleško podporo. Popoln za moderne spletne strani."
+keywords: "Astro projekt, večjezična spletna stran, i18n, starter template, dinamično usmerjanje, slovenščina, angleščina, lokalizacija, MDX"
+---
+
 # Dokumentacija dinamičnega usmerjanja z i18n
 
 Ker Astro privzeto še ne podpira lokalizacije URL-jev, je bil potreben drugačen pristop za omogočitev večjezičnih strani. Ta projekt uporablja dinamične parametre (`[...pages]`) za implementacijo lokaliziranih poti.
@@ -34,10 +41,25 @@ src/
 │   └── sl/               # Slovenski prevodi
 ├── pages/                # Strani z dinamičnim usmerjanjem
 │   ├── [about]/          # O nas strani
-│   ├── [blog]/           # Blog strani
-│   ├── [...index].astro    # Domača stran
-│   ├── [...pages].astro    # Splošne strani
-│   └── [...contact].astro  # Kontakt stran
+│   │   ├── [...index].astro
+│   │   ├── _about-en.mdx
+│   │   └── _about-sl.mdx
+│   ├── [blog]/           # Podrobne blog strani
+│   │   └── [...slug].astro
+│   ├── [dyn_routing]/    # Primeri dinamičnega usmerjanja
+│   │   ├── [subpage2]/
+│   │   │   └── [...index].astro
+│   │   └── [...subpage1].astro
+│   ├── [pages]/          # Splošne strani
+│   │   ├── [...index].astro
+│   │   ├── _pages-en.mdx
+│   │   └── _pages-sl.mdx
+│   ├── [pagination]/     # Primeri paginacije
+│   │   └── [...slug].astro
+│   ├── [...blog].astro   # Seznam blog objav
+│   ├── [...contact].astro # Kontakt stran
+│   ├── [...index].astro  # Domača stran
+│   └── 404.astro         # Napaka stran
 └── styles/              # Stilske datoteke
 ```
 
@@ -45,13 +67,12 @@ src/
 
 ### 1. Struktura URL-jev
 
-| Vzorec strani              | Angleški URL | Slovenski URL                | Opis           |
-| -------------------------- | ------------ | ---------------------------- | -------------- |
-| `[...index].astro`         | `/`          | `/sl/`                       | Domača stran   |
-| `[about]/[...index].astro` | `/about`     | `/sl/o-projektu`             | O nas          |
-| `[...pages].astro`         | `/pages`     | `/sl/strani`                 | Splošne strani |
-| `[...contact].astro`       | `/contact`   | `/sl/kontakt`                | Kontakt        |
-| `[blog]/[...slug].astro`   | `/blog/post` | `/sl/spletni-dnevnik/objava` | Blog objave    |
+| Vzorec strani              | Angleški URL | Slovenski URL                | Opis         |
+| -------------------------- | ------------ | ---------------------------- | ------------ |
+| `[...index].astro`         | `/`          | `/sl/`                       | Domača stran |
+| `[about]/[...index].astro` | `/about`     | `/sl/o-projektu`             | O nas        |
+| `[...contact].astro`       | `/contact`   | `/sl/kontakt`                | Kontakt      |
+| `[blog]/[...slug].astro`   | `/blog/post` | `/sl/spletni-dnevnik/objava` | Blog objave  |
 
 ### 2. Vizualen prikaz usmerjanja
 
@@ -71,7 +92,7 @@ Datoteka: [about]/[...index].astro
     └── Vsebina: _about-sl.md
 ```
 
-### 3. Alternativne strukture strani
+### 3. Strukture strani
 
 Obstajata dva glavna vzorca za implementacijo dinamičnih strani:
 
@@ -127,13 +148,12 @@ export const routes: Record<string, Record<string, string>> = {
 };
 ```
 
-> **Pomembno**: Ključi se morajo ujemati z imeni datotek v `pages/` mapi!
+> **Pomembno**: Ključi se morajo ujemati s parametri v `getStaticPaths()` funkcijah!
 
 ### 2. `src/i18n/ui.ts` - Konfiguracija jezikov
 
 Ta datoteka vsebuje ključne konfiguracije za jezikovno podporo:
 
--   **`localeModules`** - funkcija, ki glede na izbrani jezik pridobi vse JSON datoteke z besedili za ta jezik
 -   **`languages`** - definira podprte jezike in njihove oznake; tukaj lahko dodate nov jezik
 -   **`defaultLang`** - določa privzeti jezik aplikacije (trenutno še ni mogoče dinamično spreminjati)
 -   **`showDefaultLang`** - nadzoruje, ali se privzeti jezik prikaže v URL-ju (npr. "/en/" namesto "/")
@@ -182,7 +202,7 @@ Vrača funkcijo za prevajanje poti:
 
 ```typescript
 const translatePath = useTranslatedPath(lang);
-const localizedUrl = translatePath("/about"); // "/o-projektu" za slovenščino
+<a href={translatePath("/about")}>About</a>; // "/o-projektu" za slovenščino
 ```
 
 #### `switchLanguageUrl(currentUrl: URL, targetLang: string)`
@@ -198,17 +218,17 @@ const newUrl = await switchLanguageUrl(Astro.url, "sl");
 ```typescript
 const navigationData = [
     {
-        key: "menu.list.home", // Ključ za prevod
-        url: "/", // Angleška pot (privzeta)
+        label: "menu.list.home", // Ključ za prevod
+        href: "/", // Angleška pot (privzeta)
         children: [],
     },
     {
-        key: "menu.list.service",
-        url: "/services",
+        label: "menu.list.service",
+        href: "/services",
         children: [
             {
-                key: "menu.list.subpage-1",
-                url: "/services/service-1",
+                label: "menu.list.subpage-1",
+                href: "/services/service-1",
             },
         ],
     },
@@ -251,6 +271,8 @@ src/locales/
     }
 }
 ```
+
+> **Opomba**: Za datoteke `common.json` ne rabiš predpone `common:`. Uporabi direktno `t("menu.list.home")`, ne `t("common:menu.list.home")`.
 
 ### 3. Uporaba prevodov v komponentah
 
@@ -324,7 +346,7 @@ export function getStaticPaths() {
 
 > **Opomba**: Projekt vključuje tudi primer ročno implementirane paginacije v `[pagination]/[...slug].astro`.
 >
-> Paginacija ni implementirana z uporabo privzete Astro `paginate()` funkcije, ampak je logika napisana od začetka. To je bilo potrebno zaradi tehničnih izzivov pri integraciji s sistemom i18n. Če uspe komu integrirati privzeto `paginate()` funkcijo z lokaliziranimi URL-ji, bom hvaležen za pull request.
+> Paginacija ni implementirana z uporabo privzete Astro `paginate()` funkcije, ampak je logika napisana od začetka. To je bilo potrebno zaradi tehničnih izzivov pri integraciji s sistemom i18n. Če uspe komu integrirati privzeto `paginate()` funkcijo z lokaliziranimi URL-ji, **bom hvaležen za pull request.**
 
 ## 💻 Primeri uporabe
 
@@ -332,6 +354,7 @@ export function getStaticPaths() {
 
 ```astro
 ---
+import { useTranslations } from "@i18n/utils";
 export function getStaticPaths() {
     return [
         { params: { pages: "/services" }, props: { lang: "en" } },
