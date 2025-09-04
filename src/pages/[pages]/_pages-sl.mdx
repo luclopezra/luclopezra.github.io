@@ -52,7 +52,7 @@ export function getStaticPaths() {
         // Since this file is in [about] folder, the [about] param becomes "about"
         // [...index] = undefined means no additional URL segments after /about
         {
-            params: { pages: "pages", index: undefined },
+            params: { about: "about", index: undefined },
             props: { lang: "en" },
         },
         // Slovenian route: /sl/o-projektu
@@ -60,7 +60,7 @@ export function getStaticPaths() {
         // [...index] = "o-projektu" captures the localized page name after /sl/
         // This creates the final URL: /sl/o-projektu
         {
-            params: { pages: "sl", index: "strani" },
+            params: { about: "sl", index: "o-projektu" },
             props: { lang: "sl" },
         },
     ];
