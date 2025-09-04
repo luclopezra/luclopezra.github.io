@@ -48,19 +48,19 @@ export function getStaticPaths() {
 ```javascript
 export function getStaticPaths() {
     return [
-        // English route: /about
-        // Since this file is in [about] folder, the [about] param becomes "about"
-        // [...index] = undefined means no additional URL segments after /about
+        // English route: /pages
+        // Since this file is in [pages] folder, the [pages] param becomes "pages"
+        // [...index] = undefined means no additional URL segments after /pages
         {
-            params: { about: "about", index: undefined },
+            params: { pages: "pages", index: undefined },
             props: { lang: "en" },
         },
-        // Slovenian route: /sl/o-projektu
-        // [about] = "sl" acts as language prefix in URL
-        // [...index] = "o-projektu" captures the localized page name after /sl/
-        // This creates the final URL: /sl/o-projektu
+        // Slovenian route: /sl/strani
+        // [pages] = "sl" acts as language prefix in URL
+        // [...index] = "strani" captures the localized page name after /sl/
+        // This creates the final URL: /sl/strani
         {
-            params: { about: "sl", index: "o-projektu" },
+            params: { pages: "sl", index: "strani" },
             props: { lang: "sl" },
         },
     ];
