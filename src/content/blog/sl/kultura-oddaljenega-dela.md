@@ -3,6 +3,7 @@ title: "Kultura oddaljenega dela: uspevanje v hibridni eri"
 linkedContent: "remote-work-culture"
 
 description: "Poglobljen pogled na to, kako oddaljeni in hibridni delovni modeli oblikujejo organizacijsko kulturo in dobro počutje zaposlenih."
+keywords: "oddaljeno delo, hibridno delo, delo od doma, organizacijska kultura, dobro počutje zaposlenih, komunikacija ekipe, produktivnost, izgorelost, upravljanje ekip, prihodnost dela"
 
 author: "Nik Klemenc"
 pubDate: 2025-05-10

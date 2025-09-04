@@ -3,6 +3,7 @@ title: "Blockchain Beyond Crypto: Real-World Applications in 2025"
 linkedContent: "blockchain-beyond-crypto"
 
 description: "An exploration of how blockchain is moving beyond cryptocurrency to reshape industries like healthcare, logistics, and digital identity."
+keywords: "blockchain technology, distributed ledger, digital transformation, healthcare technology, supply chain, digital identity, smart contracts, decentralized systems"
 
 author: "Nik Klemenc"
 pubDate: 2025-06-14

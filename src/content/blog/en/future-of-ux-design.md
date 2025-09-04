@@ -3,6 +3,7 @@ title: "The Future of UX Design in a Digital-First World"
 linkedContent: "future-of-ux-design"
 
 description: "Exploring the trends and innovations shaping the future of UX design, from immersive interfaces to AI-powered personalization."
+keywords: "UX design, user experience, digital design, design trends, interface design, user-centered design, design innovation, UX research"
 
 author: "Nik Klemenc"
 pubDate: 2025-02-12

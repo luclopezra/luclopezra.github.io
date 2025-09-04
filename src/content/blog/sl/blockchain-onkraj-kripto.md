@@ -3,6 +3,7 @@ title: "Blockchain onkraj kripto: resnične aplikacije v letu 2025"
 linkedContent: "blockchain-beyond-crypto"
 
 description: "Raziskovanje, kako blockchain presega kriptovalute in preoblikuje industrije, kot so zdravstvo, logistika in digitalna identiteta."
+keywords: "blockchain tehnologija, blockchain aplikacije, blockchain zdravstvo, dobavne verige, digitalna identiteta, blockchain rešitve, blockchain 2025, blockchain industrije, blockchain varnost, blockchain transparentnost"
 
 author: "Nik Klemenc"
 pubDate: 2025-06-14

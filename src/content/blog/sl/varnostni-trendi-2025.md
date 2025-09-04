@@ -3,6 +3,7 @@ title: "Glavni varnostni trendi za leto 2025"
 linkedContent: "security-trends-2025"
 
 description: "Poglobljeno raziskovanje kibernetskih varnostnih izzivov in rešitev, ki opredeljujejo digitalno pokrajino leta 2025."
+keywords: "kibernetska varnost, varnostni trendi, kibernetski napadi, UI varnost, phishing, ničelno zaupanje, varnost v oblaku, kibernetske grožnje, varnost 2025, digitalna varnost"
 
 author: "Nik Klemenc"
 pubDate: 2025-03-05

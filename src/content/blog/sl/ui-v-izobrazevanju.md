@@ -3,6 +3,7 @@ title: "UI v izobraževanju: preoblikovanje učnih izkušenj"
 linkedContent: "ai-in-education"
 
 description: "Kako umetna inteligenca spreminja način poučevanja, učenja in vrednotenja znanja v učilnicah in zunaj njih."
+keywords: "umetna inteligenca, izobraževalna tehnologija, UI v učilnici, strojno učenje, izobraževalna UI, personalizirano učenje, EdTech, digitalna transformacija"
 
 author: "Nik Klemenc"
 pubDate: 2025-07-22

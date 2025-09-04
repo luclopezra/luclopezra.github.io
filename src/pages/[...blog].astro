@@ -67,6 +67,7 @@ const authors = authorsRaw.map((a) => ({
     title={t("blog:head.title")}
     meta={{
         description: t("blog:head.description"),
+        keywords: t("blog:head.keywords"),
     }}
 >
     <section>
@@ -94,6 +95,7 @@ const authors = authorsRaw.map((a) => ({
                                     loading="lazy"
                                     quality={"high"}
                                     sizes="(min-width: 1024px) 800px, 100vw"
+                                    transition:name={`${post.data.title}-image`}
                                 />
                                 <div class="text">
                                     <p class="date">

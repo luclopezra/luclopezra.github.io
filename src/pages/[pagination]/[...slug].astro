@@ -1,4 +1,5 @@
 ---
+// Imports
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import Base from "@layouts/Base.astro";
@@ -7,15 +8,17 @@ import { formatDate } from "@utils/utils";
 import { useTranslations, useTranslatedPath } from "@i18n/utils";
 import Pagination from "@components/Pagination.astro";
 
+// Get current language from URL and generate paginated paths for blog listing
 export const getStaticPaths = (async () => {
+    // Fetch all blog posts and authors
     const posts = await getCollection("blog", (entry) => !entry.data.isDraft);
     const authorsRaw = await getCollection("authors");
 
     // Define how many posts per page
     const PAGE_SIZE = 4;
 
-    // Languages configuration
-    const languages = [
+    // Define language configurations
+    const langConfigs = [
         {
             code: "en",
             prefix: "en/",
@@ -30,7 +33,8 @@ export const getStaticPaths = (async () => {
         },
     ];
 
-    return languages.flatMap(({ code, prefix, pagination, slug }) => {
+    // Generate and return all paginated paths
+    return langConfigs.flatMap(({ code, prefix, pagination, slug }) => {
         // Filter and sort posts for this language
         const filteredPosts = posts
             .filter((post) => post.id.startsWith(prefix))
@@ -55,6 +59,7 @@ export const getStaticPaths = (async () => {
             Math.ceil(filteredPosts.length / PAGE_SIZE)
         );
 
+        // Create paths for each page
         return Array.from({ length: totalPages }, (_, index) => {
             const pageNum = index + 1;
             const start = index * PAGE_SIZE;
@@ -83,9 +88,11 @@ export const getStaticPaths = (async () => {
     });
 }) satisfies GetStaticPaths;
 
+// Props
 const { posts, lang, authors, currentPage, totalPages, totalPosts } =
     Astro.props;
 
+// Translations
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 ---
@@ -94,45 +101,78 @@ const translatePath = useTranslatedPath(lang);
     title={t("blog:head.title")}
     meta={{
         description: t("blog:head.description"),
+        keywords: t("blog:head.keywords"),
     }}
 >
-    <section>
-        <h1>{t("blog:title")}</h1>
-        <p class="text-2xl font-semibold mb-4 text-center">
-            {t("blog:descriptionPagination")}
-        </p>
-        <p class="text-lg font-semibold mb-4 text-center">
-            {t("blog:totalPosts", { count: totalPosts })}
-        </p>
-        <section class="space-y-10">
+    <section role="main" aria-labelledby="blog-title">
+        <!-- Page Header -->
+        <div>
+            <h1 id="blog-title">{t("blog:title")}</h1>
+            <p class="text-2xl font-semibold mb-4 text-center">
+                {t("blog:descriptionPagination")}
+            </p>
+            <p
+                class="text-base text-center opacity-60 mb-10 block"
+                aria-live="polite"
+            >
+                {t("blog:totalPosts", { count: totalPosts })}
+            </p>
+        </div>
+
+        <!-- Blog Posts List -->
+        <section
+            class="space-y-10"
+            role="feed"
+            aria-label="Blog posts"
+            aria-labelledby="blog-title"
+        >
             {
                 posts.length > 0 ? (
-                    posts.map((post) => {
+                    posts.map((post, index) => {
                         const author = authors.find(
                             (a) => a.id === post.data.author.id
                         );
+                        const postUrl = `${translatePath("/blog")}/${post.id.split("/")[1]}`;
+                        const postId = `post-${index}`;
+
                         return (
-                            <article class="card-blog">
+                            <article
+                                class="card-blog"
+                                role="article"
+                                aria-labelledby={`${postId}-title`}
+                                aria-describedby={`${postId}-excerpt`}
+                            >
                                 <a
-                                    href={`${translatePath("/blog")}/${post.id.split("/")[1]}`}
+                                    href={postUrl}
+                                    aria-label={`${post.data.title}`}
                                 >
                                     <Image
                                         src={post.data.image}
                                         alt={
                                             post.data.imageAlt ||
-                                            post.data.title
+                                            `${post.data.title}`
                                         }
                                         class="image"
                                         loading="lazy"
                                         quality={"high"}
                                         sizes="(min-width: 1024px) 800px, 100vw"
+                                        role="img"
+                                        transition:name={`${post.data.title}-image`}
                                     />
                                     <div class="text">
-                                        <p class="date">
+                                        <time
+                                            class="date block"
+                                            datetime={post.data.pubDate.toISOString()}
+                                            aria-label={`${formatDate(post.data.pubDate)}`}
+                                        >
                                             {formatDate(post.data.pubDate)}
-                                        </p>
+                                        </time>
 
-                                        <div class="author">
+                                        <div
+                                            class="author"
+                                            role="group"
+                                            aria-label={author?.data?.name}
+                                        >
                                             <Image
                                                 src={author?.data?.image}
                                                 alt={author?.data?.name}
@@ -141,21 +181,32 @@ const translatePath = useTranslatedPath(lang);
                                                 loading="lazy"
                                                 quality={"mid"}
                                                 class="rounded-full"
+                                                role="img"
                                             />
                                             <div>
                                                 <h3>{author?.data?.name}</h3>
-                                                <p class="position">
+                                                <p
+                                                    class="position"
+                                                    aria-label={`${author?.data?.position}`}
+                                                >
                                                     {author?.data?.position}
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <h2>{post.data.title}</h2>
-                                        <p>{post.data.description}</p>
+                                        <h2 id={`${postId}-title`}>
+                                            {post.data.title}
+                                        </h2>
+                                        <p id={`${postId}-excerpt`}>
+                                            {post.data.description}
+                                        </p>
                                         <div class="w-fit">
-                                            <p class="button">
+                                            <span
+                                                class="button"
+                                                aria-hidden="true"
+                                            >
                                                 {t("blog:readMore")} →
-                                            </p>
+                                            </span>
                                         </div>
                                     </div>
                                 </a>
@@ -163,11 +214,14 @@ const translatePath = useTranslatedPath(lang);
                         );
                     })
                 ) : (
-                    <p class="text-center opacity-50">{t("blog:noPosts")}</p>
+                    <p class="text-center opacity-50" role="status">
+                        {t("blog:noPosts")}
+                    </p>
                 )
             }
         </section>
 
+        <!-- Pagination Controls -->
         <Pagination
             lang={lang}
             currentPage={currentPage}

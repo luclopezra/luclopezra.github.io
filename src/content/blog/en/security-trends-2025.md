@@ -3,6 +3,7 @@ title: "Top Security Trends for 2025"
 linkedContent: "security-trends-2025"
 
 description: "A deep dive into the cybersecurity challenges and solutions defining the digital landscape in 2025."
+keywords: "cybersecurity, security trends, data protection, network security, cyber threats, digital security, information security, security solutions"
 
 author: "Nik Klemenc"
 pubDate: 2025-03-05

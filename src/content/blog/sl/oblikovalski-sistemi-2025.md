@@ -3,6 +3,7 @@ title: "Oblikovalski sistemi leta 2025: onkraj skladnosti"
 linkedContent: "design-systems-2025"
 
 description: "Kako se oblikovalski sistemi razvijajo iz statičnih smernic v dinamične, z UI podprte ekosisteme, ki spodbujajo inovacije izdelkov."
+keywords: "oblikovalski sistemi, design systems, UI komponente, oblikovalski žetoni, UI/UX, DevOps oblikovanje, dinamični žetoni, oblikovalska skladnost, produkcijski sistemi, oblikovalska avtomatizacija"
 
 author: "Nik Klemenc"
 pubDate: 2025-04-02

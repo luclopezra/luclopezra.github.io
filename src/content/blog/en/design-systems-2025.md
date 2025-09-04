@@ -3,6 +3,7 @@ title: "Design Systems in 2025: Beyond Consistency"
 linkedContent: "design-systems-2025"
 
 description: "How design systems are evolving from static guidelines into dynamic, AI-powered ecosystems that drive product innovation."
+keywords: "design systems, UI components, design tokens, component library, design consistency, product design, UX design, design workflow"
 
 author: "Nik Klemenc"
 pubDate: 2025-04-02

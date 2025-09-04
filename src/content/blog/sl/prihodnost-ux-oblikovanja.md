@@ -3,6 +3,7 @@ title: "Prihodnost UX oblikovanja v digitalno-prvem svetu"
 linkedContent: "future-of-ux-design"
 
 description: "Raziskovanje trendov in inovacij, ki oblikujejo prihodnost UX oblikovanja, od potopljivih vmesnikov do personalizacije, ki jo poganja UI."
+keywords: "UX oblikovanje, uporabniška izkušnja, UI oblikovanje, personalizacija, AR VR oblikovanje, potopljive tehnologije, UI trendi, digitalno oblikovanje, UX prihodnost, oblikovalski trendi"
 
 author: "Nik Klemenc"
 pubDate: 2025-02-12
