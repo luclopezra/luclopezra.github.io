@@ -142,7 +142,7 @@ Detailed documentation with examples is available in the demo site.
 
 ```bash
 # .env
-PRODUCTION_DOMAIN = "https://your-domain.com"  # Used for SEO meta tags and social sharing
+PRODUCTION_DOMAIN = "https://your-domain.com"  # Used to enable robots.txt
 ```
 
 **Important:** Set your production domain for proper:
