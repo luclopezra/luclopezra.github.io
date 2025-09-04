@@ -194,11 +194,15 @@ footer {
 }
 
 .button {
-    @apply py-2 px-4 rounded-4xl border border-black/25 hover:opacity-50 block;
+    @apply py-2 px-4 rounded-4xl border border-black/25 hover:opacity-50 block cursor-pointer;
 
     &.disabled {
         @apply opacity-30 cursor-not-allowed hover:opacity-30;
     }
+}
+
+.input {
+    @apply py-2 px-6 rounded-4xl border border-black/25;
 }
 
 .pagination {

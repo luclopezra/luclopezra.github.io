@@ -3,6 +3,7 @@
 import { useTranslations } from "@i18n/utils";
 import Base from "@layouts/Base.astro";
 import "@styles/markdown.css";
+import Counter from "@components/Counter.svelte";
 
 // Get current language from URL
 export function getStaticPaths() {
@@ -87,5 +88,16 @@ export function getStaticPaths() {
         },
     ];
 }`}</code></pre>
+    </section>
+    <section aria-label={t("component:title")} id="md-content">
+        <h2>{t("component:title")}</h2>
+        <p set:html={t("component:description")} />
+        <Counter
+            client:load
+            translations={{
+                title: t("component:framework", { framework: "Svelte" }),
+                body: t("component:body"),
+            }}
+        />
     </section>
 </Base>
