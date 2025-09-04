@@ -27,6 +27,8 @@ This project implements a comprehensive internationalization (i18n) system that 
 
 **Perfect for:** Projects requiring complete URL localization alongside content translation
 
+![Overview](public/github-image.jpg)
+
 ---
 
 ## 🛠️ Tech Stack

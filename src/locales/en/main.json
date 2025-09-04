@@ -35,7 +35,7 @@
                     "p": "Full support for <span>URL localization</span>, improving both SEO and the user experience."
                 },
                 {
-                    "p": "Includes the latest versions of <span>Astro (v5.12)</span> and <span>Tailwind (v4)</span>, ensuring stability and long-term support."
+                    "p": "Includes the latest versions of <span>Astro (v5.13)</span> and <span>Tailwind (v4)</span>, ensuring stability and long-term support."
                 },
                 {
                     "p": "Allows <span>language switching</span> without losing context — the user stays on the same page or blog post when changing languages."
@@ -52,7 +52,7 @@
                     "p": "The full project is available on <span>GitHub</span> and can be used as a foundation for your own multilingual projects."
                 },
                 {
-                    "p": "Find more information <span>in the documentation</span>, including guides and examples to quickly adapt it to your needs."
+                    "p": "Find more information in the <span>About and Pages subpages</span>, including guides and examples to quickly adapt it to your needs."
                 }
             ],
             "github": "View on GitHub"

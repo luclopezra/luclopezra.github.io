@@ -35,7 +35,7 @@
                     "p": "Popolna podpora za <span>lokalizacijo URL-jev</span>, kar izboljšuje SEO in uporabniško izkušnjo."
                 },
                 {
-                    "p": "Vključuje najnovejšo verzijo <span>Astro (v5.12)</span> in <span>Tailwind (v4)</span>, s čimer zagotavlja stabilnost in dolgoročno podporo."
+                    "p": "Vključuje najnovejšo verzijo <span>Astro (v5.13)</span> in <span>Tailwind (v4)</span>, s čimer zagotavlja stabilnost in dolgoročno podporo."
                 },
                 {
                     "p": "Omogoča <span>preklapljanje med jeziki</span> brez izgube konteksta – uporabnik ostane na isti strani ali blog objavi ob spremembi jezika."
@@ -52,7 +52,7 @@
                     "p": "Celoten projekt je na voljo na <span>GitHubu</span> in ga lahko uporabiš kot osnovo za svoje lastne večjezične projekte."
                 },
                 {
-                    "p": "Več informacij najdeš <span>v dokumentaciji</span>, kjer so vodiči in primeri za hitro prilagoditev svojim potrebam."
+                    "p": "Več informacij najdeš na straneh <span>O projektu in Strani</span>, kjer so vodiči in primeri za hitro prilagoditev svojim potrebam."
                 }
             ],
             "github": "Poglej na GitHub-u"
