@@ -55,7 +55,7 @@ src/
 │   │   ├── _pages-en.mdx
 │   │   └── _pages-sl.mdx
 │   ├── [pagination]/     # Primeri paginacije
-│   │   └── [...slug].astro
+│   │   └── [...page].astro
 │   ├── [...blog].astro   # Seznam blog objav
 │   ├── [...contact].astro # Kontakt stran
 │   ├── [...index].astro  # Domača stran
@@ -342,7 +342,6 @@ export const getStaticPaths = async ({ paginate }) => {
     const posts = /* pridobi in uredi objave po jeziku */ [];
     return paginate(posts, {
         pageSize: 4,
-        pageParam: "page", // ustreza [...page]
         params: { pagination: "blog-pagination" },
         props: {
             /* lang, authors, totals */

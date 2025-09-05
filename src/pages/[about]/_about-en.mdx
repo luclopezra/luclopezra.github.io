@@ -55,7 +55,7 @@ src/
 │   │   ├── _pages-en.mdx
 │   │   └── _pages-sl.mdx
 │   ├── [pagination]/     # Pagination examples
-│   │   └── [...slug].astro
+│   │   └── [...page].astro
 │   ├── [...blog].astro   # Blog listing page
 │   ├── [...contact].astro # Contact page
 │   ├── [...index].astro  # Home page
@@ -344,7 +344,6 @@ export const getStaticPaths = async ({ paginate }) => {
     const posts = /* fetch posts and sort per language */ [];
     return paginate(posts, {
         pageSize: 4,
-        pageParam: "page", // matches [...page]
         params: { pagination: "blog-pagination" },
         props: {
             /* lang, authors, totals */
