@@ -20,6 +20,6 @@
         "noPreviousPage": "No previous page available",
         "noNextPage": "No next page available",
         "currentPage": "Current page {{page}}",
-        "pageOf": "Page {{current}} of {{total}}"
+        "pageOf": "Page {{current}} of {{lastPage}}"
     }
 }

@@ -328,7 +328,7 @@ The system enables linking authors with blog posts. In this case, a JSON format 
         "image": "./nik.jpg",
         "position": {
             "en": "Full-stack Developer",
-            "sl": "Razvijalec celotnega sklada"
+            "sl": "Full-stack razvijalec"
         }
     }
 }
@@ -336,19 +336,25 @@ The system enables linking authors with blog posts. In this case, a JSON format 
 
 ## 📄 Pagination
 
-The project includes an example of pagination in `[pagination]/[...slug].astro`, implemented without using Astro's default `paginate()` function.
+The project includes an example of pagination in `[pagination]/[...page].astro`, implemented using Astro’s default `paginate()` and adapted for localized URLs.
 
-```javascript
-// Manually implemented pagination
-export function getStaticPaths() {
-    // Logic for generating pagination pages
-    // Supports localized URLs
-}
+```ts
+// Pagination with Astro's paginate()
+export const getStaticPaths = async ({ paginate }) => {
+    const posts = /* fetch posts and sort per language */ [];
+    return paginate(posts, {
+        pageSize: 4,
+        pageParam: "page", // matches [...page]
+        params: { pagination: "blog-pagination" },
+        props: {
+            /* lang, authors, totals */
+        },
+    });
+};
 ```
 
-> **Note**: The project also includes an example of manually implemented pagination in `[pagination]/[...slug].astro`.
->
-> Pagination is not implemented using the default Astro `paginate()` function, but the logic is written from scratch. This was necessary due to technical challenges integrating with the i18n system. If someone manages to integrate the default `paginate()` function with localized URLs, **I would appreciate a pull request.**
+-   URLs: EN `/blog-pagination`, `/blog-pagination/2`; SL `/sl/spletni-dnevnik-paginacija`, `/sl/spletni-dnevnik-paginacija/2`.
+-   The template uses `page.data`, `page.currentPage`, and `page.lastPage`.
 
 ## 💻 Usage Examples
 

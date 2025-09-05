@@ -20,6 +20,6 @@
         "noPreviousPage": "Ni prejšnje strani",
         "noNextPage": "Ni naslednje strani",
         "currentPage": "Trenutna stran {{page}}",
-        "pageOf": "Stran {{current}} od {{total}}"
+        "pageOf": "Stran {{current}} od {{lastPage}}"
     }
 }

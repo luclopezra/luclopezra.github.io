@@ -9,42 +9,40 @@ import { useTranslations, useTranslatedPath } from "@i18n/utils";
 import Pagination from "@components/Pagination.astro";
 
 // Get current language from URL and generate paginated paths for blog listing
-export const getStaticPaths = (async () => {
+export const getStaticPaths = (async ({ paginate }) => {
     // Fetch all blog posts and authors
     const posts = await getCollection("blog", (entry) => !entry.data.isDraft);
     const authorsRaw = await getCollection("authors");
 
-    // Define how many posts per page
+    // Posts per page
     const PAGE_SIZE = 4;
 
-    // Define language configurations
+    // Language + routing config
     const langConfigs = [
         {
-            code: "en",
+            code: "en" as const,
             prefix: "en/",
             pagination: "blog-pagination",
-            slug: undefined,
+            page: undefined as string | undefined,
         },
         {
-            code: "sl",
+            code: "sl" as const,
             prefix: "sl/",
             pagination: "sl",
-            slug: "spletni-dnevnik-paginacija",
+            page: "spletni-dnevnik-paginacija",
         },
     ];
 
-    // Generate and return all paginated paths
-    return langConfigs.flatMap(({ code, prefix, pagination, slug }) => {
-        // Filter and sort posts for this language
-        const filteredPosts = posts
-            .filter((post) => post.id.startsWith(prefix))
+    // Use Astro's paginate() then post-process params to keep your i18n URL shape
+    return langConfigs.flatMap(({ code, prefix, pagination, page }) => {
+        const filtered = posts
+            .filter((p) => p.id.startsWith(prefix))
             .sort(
                 (a, b) =>
                     new Date(b.data.pubDate).getTime() -
                     new Date(a.data.pubDate).getTime()
             );
 
-        // Get localized authors
         const authors = authorsRaw.map((a) => ({
             ...a,
             data: {
@@ -53,44 +51,33 @@ export const getStaticPaths = (async () => {
             },
         }));
 
-        // Generate pagination paths - ensure at least one page even if no posts
-        const totalPages = Math.max(
-            1,
-            Math.ceil(filteredPosts.length / PAGE_SIZE)
-        );
+        const pages = paginate(filtered, {
+            pageSize: PAGE_SIZE,
+            // Fixed segment before the catch-all ("blog-pagination" or "sl")
+            params: { pagination },
+            // Extra props for every page
+            props: { lang: code, authors },
+        });
 
-        // Create paths for each page
-        return Array.from({ length: totalPages }, (_, index) => {
-            const pageNum = index + 1;
-            const start = index * PAGE_SIZE;
-            const postsForPage = filteredPosts.slice(start, start + PAGE_SIZE);
+        // For Slovenian, first page: /sl/spletni-dnevnik-paginacija
+        // Next pages: /sl/spletni-dnevnik-paginacija/2, ...
+        // For English, first page: /blog-pagination; next: /blog-pagination/2
+        return pages.map((p) => {
+            const current = (p.props as any)?.page?.currentPage ?? 1;
+            const pageSeg = (p.params as any)?.page as string | undefined; // e.g. "2" on page 2
+            const computedPageParam =
+                current === 1 ? page : page ? `${page}/${pageSeg}` : pageSeg;
 
             return {
-                params: {
-                    pagination,
-                    slug:
-                        pageNum === 1
-                            ? slug
-                            : slug
-                              ? `${slug}/${pageNum}`
-                              : `${pageNum}`,
-                },
-                props: {
-                    lang: code,
-                    posts: postsForPage,
-                    authors,
-                    currentPage: pageNum,
-                    totalPages,
-                    totalPosts: filteredPosts.length,
-                },
+                params: { pagination, page: computedPageParam },
+                props: p.props,
             };
         });
     });
 }) satisfies GetStaticPaths;
 
 // Props
-const { posts, lang, authors, currentPage, totalPages, totalPosts } =
-    Astro.props;
+const { page, lang, authors } = Astro.props;
 
 // Translations
 const t = useTranslations(lang);
@@ -115,7 +102,7 @@ const translatePath = useTranslatedPath(lang);
                 class="text-base text-center opacity-60 mb-10 block"
                 aria-live="polite"
             >
-                {t("blog:totalPosts", { count: totalPosts })}
+                {t("blog:totalPosts", { count: page?.total })}
             </p>
         </div>
 
@@ -127,8 +114,8 @@ const translatePath = useTranslatedPath(lang);
             aria-labelledby="blog-title"
         >
             {
-                posts.length > 0 ? (
-                    posts.map((post, index) => {
+                page.data.length > 0 ? (
+                    page.data.map((post, index) => {
                         const author = authors.find(
                             (a) => a.id === post.data.author.id
                         );
@@ -224,8 +211,8 @@ const translatePath = useTranslatedPath(lang);
         <!-- Pagination Controls -->
         <Pagination
             lang={lang}
-            currentPage={currentPage}
-            totalPages={totalPages}
+            currentPage={page.currentPage}
+            lastPage={page.lastPage}
             basePath="/blog-pagination"
         />
     </section>

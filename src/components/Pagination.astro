@@ -4,11 +4,11 @@ import { useTranslations, useTranslatedPath } from "@i18n/utils";
 interface Props {
     lang: string;
     currentPage: number;
-    totalPages: number;
+    lastPage: number;
     basePath: string;
 }
 
-const { lang, currentPage, totalPages, basePath } = Astro.props;
+const { lang, currentPage, lastPage, basePath } = Astro.props;
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
@@ -20,7 +20,7 @@ const prevUrl =
             : `${translatePath(basePath)}/${currentPage - 1}`
         : null;
 const nextUrl =
-    currentPage < totalPages
+    currentPage < lastPage
         ? `${translatePath(basePath)}/${currentPage + 1}`
         : null;
 ---
@@ -59,7 +59,7 @@ const nextUrl =
                 >
                     {t("blog:pagination.pageOf", {
                         current: currentPage,
-                        total: totalPages,
+                        lastPage: lastPage,
                     })}
                 </span>
 

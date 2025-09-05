@@ -326,7 +326,7 @@ Sistem omogoča povezovanje avtorjev z blog objavami. V tem primeru je uporablje
         "image": "./nik.jpg",
         "position": {
             "en": "Full-stack Developer",
-            "sl": "Razvijalec celotnega sklada"
+            "sl": "Full-stack razvijalec"
         }
     }
 }
@@ -334,19 +334,25 @@ Sistem omogoča povezovanje avtorjev z blog objavami. V tem primeru je uporablje
 
 ## 📄 Paginacija
 
-Projekt vključuje primer paginacije v `[pagination]/[...slug].astro`, ki je implementiran brez uporabe Astro-jeve privzete `paginate()` funkcije.
+Projekt vključuje primer paginacije v `[pagination]/[...page].astro`, implementiran z Astro-jevo privzeto funkcijo `paginate()` in prilagojen za lokalizirane URL-je.
 
-```javascript
-// Ročno implementirana paginacija
-export function getStaticPaths() {
-    // Logika za generiranje strani paginacije
-    // Podpira lokalizirane URL-je
-}
+```ts
+// Paginacija z Astro funkcijo paginate()
+export const getStaticPaths = async ({ paginate }) => {
+    const posts = /* pridobi in uredi objave po jeziku */ [];
+    return paginate(posts, {
+        pageSize: 4,
+        pageParam: "page", // ustreza [...page]
+        params: { pagination: "blog-pagination" },
+        props: {
+            /* lang, authors, totals */
+        },
+    });
+};
 ```
 
-> **Opomba**: Projekt vključuje tudi primer ročno implementirane paginacije v `[pagination]/[...slug].astro`.
->
-> Paginacija ni implementirana z uporabo privzete Astro `paginate()` funkcije, ampak je logika napisana od začetka. To je bilo potrebno zaradi tehničnih izzivov pri integraciji s sistemom i18n. Če uspe komu integrirati privzeto `paginate()` funkcijo z lokaliziranimi URL-ji, **bom hvaležen za pull request.**
+-   URL-ji: EN `/blog-pagination`, `/blog-pagination/2`; SL `/sl/spletni-dnevnik-paginacija`, `/sl/spletni-dnevnik-paginacija/2`.
+-   Predloga uporablja `page.data`, `page.currentPage` in `page.lastPage`.
 
 ## 💻 Primeri uporabe
 
