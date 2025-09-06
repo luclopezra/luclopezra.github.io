@@ -11,6 +11,19 @@
 
 Since Astro doesn't have built-in URL localization out of the box, this starter demonstrates how to implement a complete i18n solution for multilingual projects.
 
+---
+
+## 🚀 Advanced Variant
+
+Looking for a more advanced setup? Check the helper‑based branch (slightly more complex):
+
+-   Dynamic default language
+-   Optional language prefix
+
+Link: [https://github.com/Scorpio3310/astro-i18n-starter/tree/feat/i18n-routing-helper](https://github.com/Scorpio3310/astro-i18n-starter/tree/feat/i18n-routing-helper)
+
+---
+
 ## ✨ Features
 
 This project implements a comprehensive internationalization (i18n) system that includes:
@@ -173,10 +186,12 @@ The site generates static files optimized for any hosting provider (Netlify, Ver
 
 ## 📋 Roadmap
 
-Future enhancements being considered:
+These items are maintained in the advanced helper‑based branch:
 
--   [ ] **Dynamic default language** - Environment-based default language switching
--   [ ] **Optional language prefix** - Support for `/en/` URLs when needed
+-   [x] ~~Dynamic default language~~
+-   [x] ~~Optional language prefix~~
+
+updates: https://github.com/Scorpio3310/astro-i18n-starter/tree/feat/i18n-routing-helper
 
 ---
 
