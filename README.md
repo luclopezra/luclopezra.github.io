@@ -13,14 +13,15 @@ Since Astro doesn't have built-in URL localization out of the box, this starter 
 
 ---
 
-## 🚀 Advanced Variant
-
-Looking for a more advanced setup? Check the helper‑based branch (slightly more complex):
-
--   Dynamic default language
--   Optional language prefix
-
-Link: [https://github.com/Scorpio3310/astro-i18n-starter/tree/feat/i18n-routing-helper](https://github.com/Scorpio3310/astro-i18n-starter/tree/feat/i18n-routing-helper)
+> [!TIP]
+>
+> ## 🚀 Advanced Variant
+>
+> Looking for a more advanced setup? Check the helper‑based branch (slightly more complex):
+>
+> -   Dynamic default language
+> -   Optional language prefix
+>     Link: [https://github.com/Scorpio3310/astro-i18n-starter/tree/feat/i18n-routing-helper](https://github.com/Scorpio3310/astro-i18n-starter/tree/feat/i18n-routing-helper)
 
 ---
 
