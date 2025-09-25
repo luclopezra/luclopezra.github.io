@@ -1,5 +1,5 @@
 ---
-title: "AI in Education: Transforming Learning Experiences"
+title: "Implementación de modelos de inteligencia artificial para la predicción de caudales medios diarios en geografías diferentes"
 linkedContent: "ai-in-education"
 
 description: "How Artificial Intelligence is changing the way we teach, learn, and evaluate knowledge in classrooms and beyond."
